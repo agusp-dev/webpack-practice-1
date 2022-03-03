@@ -1,4 +1,9 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin') 
+
 module.exports = {
+  output: {
+    filename: 'app.[hash].js'
+  },
   module: {
     rules: [
       {
@@ -7,10 +12,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react']
+            presets: ['@babel/preset-react', '@babel/preset-env']
           }
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'My beautiful app',
+      template: 'src/index.html'
+    })
+  ]
 }
